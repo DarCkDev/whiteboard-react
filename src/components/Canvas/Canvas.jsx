@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactElement, RefObject, useState } from "react";
+import React, { useState } from "react";
 import { Action, Shape } from "../../models/Action";
 import styles from "./Canvas.module.css";
 
@@ -14,20 +14,8 @@ const Canvas = ({
   fill,
   fillColor,
   angle,
-}: {
-  action: number;
-  image?: string;
-  thickness: number;
-  color: string;
-  canvasRef: RefObject<HTMLCanvasElement>;
-  canvasContext: CanvasRenderingContext2D | undefined | null;
-  shape?: number;
-  setShape: (shape?: number) => void;
-  fill: boolean;
-  fillColor: string;
-  angle: number;
-}): ReactElement => {
-  const [drawing, setDrawing] = useState<boolean>(false);
+}) => {
+  const [drawing, setDrawing] = useState(false);
   const points = {
     xOrigin: 0,
     yOrigin: 0,
@@ -35,7 +23,7 @@ const Canvas = ({
     yEnd: 0,
   };
 
-  const onDown = (event: MouseEvent): void => {
+  const onDown = (event) => {
     if (!canvasContext) return;
     points.xOrigin = event.clientX;
     points.yOrigin = event.clientY;
@@ -64,7 +52,7 @@ const Canvas = ({
     }
   };
 
-  const onUp = (event: MouseEvent): void => {
+  const onUp = (event) => {
     if (!canvasContext) return;
     canvasContext?.resetTransform();
     if (shape) {
@@ -111,25 +99,20 @@ const Canvas = ({
     setDrawing(false);
   };
 
-  const getTranslateX = (xOrigin: number, xEnd: number): number => {
+  const getTranslateX = (xOrigin, xEnd) => {
     return xOrigin + xEnd / 2;
   };
-  const getTranslateY = (yOrigin: number, yEnd: number): number => {
+  const getTranslateY = (yOrigin, yEnd) => {
     return yOrigin + yEnd / 2;
   };
-  const getLength = (
-    xOrigin: number,
-    yOrigin: number,
-    xEnd: number,
-    yEnd: number
-  ): number => {
+  const getLength = (xOrigin, yOrigin, xEnd, yEnd) => {
     const d =
       Math.pow(Math.abs(xEnd - xOrigin), 2) +
       Math.pow(Math.abs(yEnd - yOrigin), 2);
     return Math.round(Math.sqrt(d));
   };
 
-  const onMove = (event: MouseEvent): void => {
+  const onMove = (event) => {
     if (drawing && canvasContext) {
       switch (action) {
         case Action.DRAW:

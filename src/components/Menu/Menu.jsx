@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactElement, useState } from "react";
+import React from "react";
 import { Action, Shape } from "../../models/Action";
 import styles from "./Menu.module.css";
 
@@ -18,37 +18,21 @@ const Menu = ({
   fill,
   setFill,
   setShape,
-}: {
-  color: string;
-  setColor: (color: string) => void;
-  thickness: number;
-  setThickness: (thickness: number) => void;
-  setAction: (action: number) => void;
-  image?: string;
-  setImage: (image?: string) => void;
-  canvasContext: CanvasRenderingContext2D | undefined | null;
-  angle: number;
-  setAngle: (angle: number) => void;
-  fillColor: string;
-  setFillColor: (fillColor: string) => void;
-  fill: boolean;
-  setFill: (fill: boolean) => void;
-  setShape: (shape?: number) => void;
-}): ReactElement => {
-  const thicknessChange = (event: ChangeEvent<HTMLInputElement>): void => {
+}) => {
+  const thicknessChange = (event) => {
     setThickness(+event.target.value);
   };
-  const colorChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const colorChange = (event) => {
     setColor(event.target.value);
   };
-  const fillColorChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const fillColorChange = (event) => {
     setFillColor(event.target.value);
   };
-  const actionChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const actionChange = (event) => {
     console.log(event.target.value);
     setAction(parseInt(event.target.value));
   };
-  const imageChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const imageChange = (event) => {
     if (event.target.files) {
       const fr = new FileReader();
       fr.onloadend = () => {
@@ -58,11 +42,11 @@ const Menu = ({
     }
   };
 
-  const angleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const angleChange = (event) => {
     setAngle(+event.target.value);
   };
 
-  const fillCheck = (event: ChangeEvent<HTMLInputElement>) => {
+  const fillCheck = (event) => {
     setFill(event.target.checked);
   };
 
@@ -108,12 +92,12 @@ const Menu = ({
     // canvasContext.stroke();
   };
 
-  const removeImage = (): void => {
+  const removeImage = () => {
     setImage(undefined);
   };
 
-  const clearCanvas = (): void => {
-    canvasContext?.clearRect(
+  const clearCanvas = () => {
+    canvasContext.clearRect(
       0,
       0,
       document.body.offsetWidth,
