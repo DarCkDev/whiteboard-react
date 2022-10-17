@@ -28,36 +28,41 @@ const Canvas = ({
     points.xOrigin = event.clientX;
     points.yOrigin = event.clientY;
     canvasContext.resetTransform();
-    if (shape !== undefined) {
-      switch (shape) {
-        case Shape.CIRCLE:
-          canvasContext.beginPath();
-          canvasContext.strokeStyle = color;
-          canvasContext.lineWidth = thickness;
-          canvasContext.fillStyle = !fill ? "#00000000" : fillColor;
-          return;
-        case Shape.SQUARE:
-          canvasContext.beginPath();
-          canvasContext.strokeStyle = color;
-          canvasContext.lineWidth = thickness;
-          canvasContext.fillStyle = !fill ? "#00000000" : fillColor;
-      }
+    canvasContext.beginPath();
+    canvasContext.strokeStyle = color;
+    canvasContext.lineWidth = thickness;
+    if (shape) {
+      canvasContext.fillStyle = !fill ? "#00000000" : fillColor;
     } else {
       setDrawing(true);
-      canvasContext.beginPath();
-      canvasContext.strokeStyle = color;
-      canvasContext.lineWidth = thickness;
       canvasContext.lineCap = "round";
       canvasContext.moveTo(event.clientX, event.clientY);
     }
   };
 
+  const onMove = (event) => {
+    if (drawing && canvasContext && !shape) {
+      switch (action) {
+        case Action.DRAW:
+          canvasContext.globalCompositeOperation = "source-over";
+          canvasContext.lineTo(event.clientX, event.clientY);
+          canvasContext.stroke();
+          break;
+        case Action.ERASE:
+          canvasContext.globalCompositeOperation = "destination-out";
+          canvasContext.lineTo(event.clientX, event.clientY);
+          canvasContext.stroke();
+          break;
+      }
+    }
+  };
+
   const onUp = (event) => {
     if (!canvasContext) return;
-    canvasContext?.resetTransform();
     if (shape) {
       points.xEnd = event.clientX;
       points.yEnd = event.clientY;
+      canvasContext.globalCompositeOperation = "source-over";
       switch (shape) {
         case Shape.CIRCLE:
           canvasContext.arc(
@@ -70,8 +75,7 @@ const Canvas = ({
           );
           canvasContext.fill();
           canvasContext.stroke();
-          setShape(undefined);
-          return;
+          break;
         case Shape.SQUARE:
           canvasContext.translate(
             getTranslateX(points.xOrigin, points.xEnd),
@@ -90,13 +94,13 @@ const Canvas = ({
           );
           canvasContext.fill();
           canvasContext.stroke();
-          setShape(undefined);
-          return;
+          break;
       }
     } else {
       canvasContext?.closePath();
     }
     setDrawing(false);
+    setShape(undefined);
   };
 
   const getTranslateX = (xOrigin, xEnd) => {
@@ -110,23 +114,6 @@ const Canvas = ({
       Math.pow(Math.abs(xEnd - xOrigin), 2) +
       Math.pow(Math.abs(yEnd - yOrigin), 2);
     return Math.round(Math.sqrt(d));
-  };
-
-  const onMove = (event) => {
-    if (drawing && canvasContext) {
-      switch (action) {
-        case Action.DRAW:
-          canvasContext.globalCompositeOperation = "source-over";
-          canvasContext.lineTo(event.clientX, event.clientY);
-          canvasContext.stroke();
-          return;
-        case Action.ERASE:
-          canvasContext.globalCompositeOperation = "destination-out";
-          canvasContext.lineTo(event.clientX, event.clientY);
-          canvasContext.stroke();
-          return;
-      }
-    }
   };
 
   return (

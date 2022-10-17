@@ -29,8 +29,8 @@ const Menu = ({
     setFillColor(event.target.value);
   };
   const actionChange = (event) => {
-    console.log(event.target.value);
     setAction(parseInt(event.target.value));
+    setShape(undefined);
   };
   const imageChange = (event) => {
     if (event.target.files) {
@@ -52,44 +52,14 @@ const Menu = ({
 
   const insertCircle = () => {
     setShape(Shape.CIRCLE);
-    // canvasContext?.resetTransform();
-    // if (!canvasContext) return;
-    // canvasContext.beginPath();
-    // canvasContext.strokeStyle = color;
-    // canvasContext.lineWidth = thickness;
-    // canvasContext.fillStyle = !fill ? "#00000000" : fillColor;
-    // canvasContext.arc(50, 50, 35, 0, 2 * Math.PI, true);
-    // canvasContext.fill();
-    // canvasContext.stroke();
   };
 
   const insertSquare = () => {
     setShape(Shape.SQUARE);
-    // canvasContext?.resetTransform();
-    // if (!canvasContext) return;
-    // canvasContext.beginPath();
-    // canvasContext.strokeStyle = color;
-    // canvasContext.lineWidth = thickness;
-    // canvasContext.fillStyle = !fill ? "#00000000" : fillColor;
-    // canvasContext.rect(200, 200, 100, 100);
-    // canvasContext.fill();
-    // canvasContext.stroke();
   };
 
   const rotateSquare = () => {
     setShape(Shape.STAR);
-    // canvasContext?.resetTransform();
-    // if (!canvasContext) return;
-    // canvasContext.translate(250, 250);
-    // canvasContext.rotate((angle * Math.PI) / 180);
-    // canvasContext.translate(-250, -250);
-    // canvasContext.beginPath();
-    // canvasContext.strokeStyle = color;
-    // canvasContext.lineWidth = thickness;
-    // canvasContext.fillStyle = !fill ? "#00000000" : fillColor;
-    // canvasContext.rect(200, 200, 100, 100);
-    // canvasContext.fill();
-    // canvasContext.stroke();
   };
 
   const removeImage = () => {
