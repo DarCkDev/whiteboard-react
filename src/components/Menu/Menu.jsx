@@ -58,8 +58,12 @@ const Menu = ({
     setShape(Shape.SQUARE);
   };
 
-  const rotateSquare = () => {
+  const insertStar = () => {
     setShape(Shape.STAR);
+  };
+
+  const insertLine = () => {
+    setShape(Shape.LINE);
   };
 
   const removeImage = () => {
@@ -158,10 +162,10 @@ const Menu = ({
         <button className={styles.btn__shape} onClick={insertSquare}>
           <i className="fa-regular fa-square"></i>
         </button>
-        <button className={styles.btn__shape} onClick={rotateSquare}>
+        <button className={styles.btn__shape} onClick={insertStar}>
           <i className="fa-regular fa-star"></i>
         </button>
-        <button className={styles.btn__shape}>
+        <button className={styles.btn__shape} onClick={insertLine}>
           <i className="fa-solid fa-slash"></i>
         </button>
       </div>

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Action, Shape } from "../../models/Action";
 import styles from "./Canvas.module.css";
 
+import { drawCircle, drawSquare, drawLine } from "../../services/draw";
+
 const Canvas = ({
   action,
   image,
@@ -24,7 +26,6 @@ const Canvas = ({
   };
 
   const onDown = (event) => {
-    if (!canvasContext) return;
     points.xOrigin = event.clientX;
     points.yOrigin = event.clientY;
     canvasContext.resetTransform();
@@ -45,75 +46,55 @@ const Canvas = ({
       switch (action) {
         case Action.DRAW:
           canvasContext.globalCompositeOperation = "source-over";
-          canvasContext.lineTo(event.clientX, event.clientY);
-          canvasContext.stroke();
           break;
         case Action.ERASE:
           canvasContext.globalCompositeOperation = "destination-out";
-          canvasContext.lineTo(event.clientX, event.clientY);
-          canvasContext.stroke();
           break;
       }
+      canvasContext.lineTo(event.clientX, event.clientY);
+      canvasContext.stroke();
     }
   };
 
   const onUp = (event) => {
-    if (!canvasContext) return;
     if (shape) {
       points.xEnd = event.clientX;
       points.yEnd = event.clientY;
       canvasContext.globalCompositeOperation = "source-over";
       switch (shape) {
         case Shape.CIRCLE:
-          canvasContext.arc(
+          drawCircle(
+            canvasContext,
             points.xOrigin,
+            points.xEnd,
             points.yOrigin,
-            getLength(points.xOrigin, points.yOrigin, points.xEnd, points.yEnd),
-            0,
-            2 * Math.PI,
-            true
+            points.yEnd
           );
-          canvasContext.fill();
-          canvasContext.stroke();
           break;
         case Shape.SQUARE:
-          canvasContext.translate(
-            getTranslateX(points.xOrigin, points.xEnd),
-            getTranslateY(points.yOrigin, points.yEnd)
-          );
-          canvasContext.rotate((angle * Math.PI) / 180);
-          canvasContext.translate(
-            -getTranslateX(points.xOrigin, points.xEnd),
-            -getTranslateY(points.yOrigin, points.yEnd)
-          );
-          canvasContext.rect(
+          drawSquare(
+            canvasContext,
             points.xOrigin,
+            points.xEnd,
             points.yOrigin,
-            getLength(points.xOrigin, points.yOrigin, points.xEnd, points.yEnd),
-            getLength(points.xOrigin, points.yOrigin, points.xEnd, points.yEnd)
+            points.yEnd,
+            angle
           );
-          canvasContext.fill();
-          canvasContext.stroke();
           break;
+        case Shape.LINE:
+          drawLine(
+            canvasContext,
+            points.xOrigin,
+            points.xEnd,
+            points.yOrigin,
+            points.yEnd
+          );
       }
     } else {
-      canvasContext?.closePath();
+      canvasContext.closePath();
     }
     setDrawing(false);
     setShape(undefined);
-  };
-
-  const getTranslateX = (xOrigin, xEnd) => {
-    return xOrigin + xEnd / 2;
-  };
-  const getTranslateY = (yOrigin, yEnd) => {
-    return yOrigin + yEnd / 2;
-  };
-  const getLength = (xOrigin, yOrigin, xEnd, yEnd) => {
-    const d =
-      Math.pow(Math.abs(xEnd - xOrigin), 2) +
-      Math.pow(Math.abs(yEnd - yOrigin), 2);
-    return Math.round(Math.sqrt(d));
   };
 
   return (

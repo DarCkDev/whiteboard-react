@@ -7,4 +7,5 @@ export const Shape = {
   CIRCLE: 1,
   SQUARE: 2,
   STAR: 3,
+  LINE: 4,
 };

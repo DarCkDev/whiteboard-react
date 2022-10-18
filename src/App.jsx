@@ -17,7 +17,7 @@ function App() {
   const [shape, setShape] = useState();
 
   useEffect(() => {
-    setContext(canvasRef.current?.getContext("2d"));
+    setContext(canvasRef.current.getContext("2d"));
   }, []);
   return (
     <div className="App">
