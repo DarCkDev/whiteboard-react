@@ -141,14 +141,14 @@ const Menu = ({
       <p>Imagen</p>
       <label htmlFor="image">
         <i className="fa-solid fa-image"></i>
+        <input
+          className={styles.menu__image}
+          id="image"
+          type="file"
+          accept="image/*"
+          onChange={imageChange}
+        />
       </label>
-      <input
-        className={styles.menu__image}
-        id="image"
-        type="file"
-        accept="image/*"
-        onChange={imageChange}
-      />
       {image && (
         <button className={styles.btn__removeimage} onClick={removeImage}>
           <i className="fa-solid fa-xmark"></i>

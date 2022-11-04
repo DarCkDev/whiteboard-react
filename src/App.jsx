@@ -19,6 +19,7 @@ function App() {
   useEffect(() => {
     setContext(canvasRef.current.getContext("2d"));
   }, []);
+
   return (
     <div className="App">
       <Canvas
