@@ -8,4 +8,5 @@ export const Shape = {
   SQUARE: 2,
   STAR: 3,
   LINE: 4,
+  TEXT: 5,
 };

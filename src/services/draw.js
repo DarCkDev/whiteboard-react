@@ -46,3 +46,17 @@ const getLength = (xOrigin, yOrigin, xEnd, yEnd) => {
     Math.pow(Math.abs(yEnd - yOrigin), 2);
   return Math.round(Math.sqrt(d));
 };
+
+export const drawText = (context, xOrigin, yOrigin, text, fontSize, fill) => {
+  if (!text) return;
+  context.font = `${fontSize}px serif`;
+  if (fill) {
+    context.fillText(
+      text,
+      xOrigin === 0 ? 10 : xOrigin,
+      yOrigin === 0 ? 10 : yOrigin
+    );
+  } else {
+    context.strokeText(text, xOrigin, yOrigin);
+  }
+};

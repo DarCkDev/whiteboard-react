@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Pizarra (React JS)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Funcionalidades
 
-## Available Scripts
+- Dibujo libre
+- Color de la línea y relleno
+- Ancho del trazo
+- Borrar todo el contenido
+- Borrador
+- Relleno opcional (al marcar el checkbox de relleno se habilita el selector de color para el relleno)
+- Cargar imagen desde los archivos.
+- Poder dibujar sobre la imagen sin afectar a la imagen.
+- Eliminar la imagen de fondo sin afectar los trazos.
+- Insertar texto
 
-In the project directory, you can run:
+## Funcionalidades con bugs
 
-### `npm start`
+- Rotar la figura
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Uso
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Por defecto está seleccionado el dibujo libre.
+Para usar el borrador se debe seleccionar el botón de borrador.
+Si se carga alguna imagen, aparecerá el botón de eliminar la imagen, de otro modo no.
 
-### `npm test`
+Para insertar un círculo se debe hacer clic en el botón de círculo, posteriormente presionar el boton izquierdo del mouse sobre el canvas y arrastrar hasta el tamaño que se quiera.
+Si se tiene la opción de relleno seleccionado, la figura tendrá el color de relleno que se haya seleccionado.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### _Insertar texto_
+
+El texto usará el color seleccionado, hacer clic en el botón T y escribir el texto en el prompt, al aceptar hacer clic sobre el canvas para insertar el texto, el lugar donde se haga clic será la parte inferior izquierda del texto. Por defecto el tamaño de fuente es 16px, pero puede ser cambiado en la sección de _Tamaño_.
+
+## Instalación
+
+### `npm run install`
+
+Para poder instalar las dependencias del proyecto
+
+### `npm run start`
+
+Inicia la aplicación en modo desarrollo.
+Abrir [http://localhost:3000](http://localhost:3000) para ver en el navegador.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Construye la aplicación para producción.

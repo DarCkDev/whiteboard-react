@@ -15,6 +15,8 @@ function App() {
   const [fillColor, setFillColor] = useState("#000000");
   const [fill, setFill] = useState(false);
   const [shape, setShape] = useState();
+  const [textSize, setTextSize] = useState(16);
+  const [text, setText] = useState();
 
   useEffect(() => {
     setContext(canvasRef.current.getContext("2d"));
@@ -34,6 +36,8 @@ function App() {
         fill={fill}
         fillColor={fillColor}
         angle={angle}
+        textSize={textSize}
+        text={text}
       />
       <Menu
         color={color}
@@ -51,6 +55,10 @@ function App() {
         fill={fill}
         setFill={setFill}
         setShape={setShape}
+        textSize={textSize}
+        setTextSize={setTextSize}
+        text={text}
+        setText={setText}
       />
     </div>
   );

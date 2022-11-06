@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Action, Shape } from "../../models/Action";
 import styles from "./Canvas.module.css";
 
-import { drawCircle, drawSquare, drawLine } from "../../services/draw";
+import {
+  drawCircle,
+  drawSquare,
+  drawLine,
+  drawText,
+} from "../../services/draw";
 
 const Canvas = ({
   action,
@@ -16,6 +21,8 @@ const Canvas = ({
   fill,
   fillColor,
   angle,
+  textSize,
+  text,
 }) => {
   const [drawing, setDrawing] = useState(false);
   const points = {
@@ -57,6 +64,7 @@ const Canvas = ({
   };
 
   const onUp = (event) => {
+    console.log("On Up");
     if (shape) {
       points.xEnd = event.clientX;
       points.yEnd = event.clientY;
@@ -89,6 +97,17 @@ const Canvas = ({
             points.yOrigin,
             points.yEnd
           );
+          break;
+        case Shape.TEXT:
+          console.log(text);
+          drawText(
+            canvasContext,
+            points.xOrigin,
+            points.yOrigin,
+            text,
+            textSize,
+            fill
+          );
       }
     } else {
       canvasContext.closePath();
@@ -110,7 +129,6 @@ const Canvas = ({
           onMouseDown={onDown}
           onMouseUp={onUp}
           onMouseMove={onMove}
-          onMouseLeave={onUp}
         />
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Action, Shape } from "../../models/Action";
+import ButtonTool from "../ButtonTool/ButtonTool";
 import styles from "./Menu.module.css";
 
 const Menu = ({
@@ -18,6 +19,9 @@ const Menu = ({
   fill,
   setFill,
   setShape,
+  textSize,
+  setTextSize,
+  setText,
 }) => {
   const thicknessChange = (event) => {
     setThickness(+event.target.value);
@@ -65,6 +69,28 @@ const Menu = ({
   const insertLine = () => {
     setShape(Shape.LINE);
   };
+
+  const insertText = () => {
+    setShape(Shape.TEXT);
+    const text = prompt("Ingrese text", undefined);
+    if (!text) {
+      setShape(undefined);
+      return;
+    }
+    setText(text);
+  };
+
+  const onTextSizeChange = (event) => {
+    setTextSize(event.target.value);
+  };
+
+  const buttons = [
+    { shape: "fa-regular fa-circle", func: insertCircle },
+    { shape: "fa-regular fa-square", func: insertSquare },
+    { shape: "fa-regular fa-star", func: insertStar },
+    { shape: "fa-solid fa-slash", func: insertLine },
+    { shape: "fa-solid fa-t", func: insertText },
+  ];
 
   const removeImage = () => {
     setImage(undefined);
@@ -156,19 +182,18 @@ const Menu = ({
       )}
       <hr style={{ width: "100%" }} />
       <div className={styles.shapes__container}>
-        <button className={styles.btn__shape} onClick={insertCircle}>
-          <i className="fa-regular fa-circle"></i>
-        </button>
-        <button className={styles.btn__shape} onClick={insertSquare}>
-          <i className="fa-regular fa-square"></i>
-        </button>
-        <button className={styles.btn__shape} onClick={insertStar}>
-          <i className="fa-regular fa-star"></i>
-        </button>
-        <button className={styles.btn__shape} onClick={insertLine}>
-          <i className="fa-solid fa-slash"></i>
-        </button>
+        {buttons.map((btn, index) => (
+          <ButtonTool key={index} shape={btn.shape} insert={btn.func} />
+        ))}
       </div>
+      <label htmlFor="input_text_size">Tamaño</label>
+      <input
+        id="input_text_size"
+        type="number"
+        value={textSize}
+        onChange={onTextSizeChange}
+      />
+      <label htmlFor="input_angle">Ángulo</label>
       <input
         type="number"
         min={0}
