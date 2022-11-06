@@ -16,6 +16,7 @@ const Canvas = ({
   color,
   canvasRef,
   canvasContext,
+  canvasContainerRef,
   shape,
   setShape,
   fill,
@@ -64,7 +65,6 @@ const Canvas = ({
   };
 
   const onUp = (event) => {
-    console.log("On Up");
     if (shape) {
       points.xEnd = event.clientX;
       points.yEnd = event.clientY;
@@ -118,7 +118,7 @@ const Canvas = ({
 
   return (
     <div className={styles.canvas__container}>
-      <div className={styles.canvas__image}>
+      <div className={styles.canvas__image} ref={canvasContainerRef}>
         {image && <img className={styles.image} src={image} alt="" />}
         <canvas
           id="canvas"

@@ -10,6 +10,7 @@ function App() {
   const [action, setAction] = useState(Action.DRAW);
   const [image, setImage] = useState(undefined);
   const canvasRef = useRef(null);
+  const canvasContainerRef = useRef(null);
   const [context, setContext] = useState();
   const [angle, setAngle] = useState(0);
   const [fillColor, setFillColor] = useState("#000000");
@@ -31,6 +32,7 @@ function App() {
         color={color}
         canvasRef={canvasRef}
         canvasContext={context}
+        canvasContainerRef={canvasContainerRef}
         shape={shape}
         setShape={setShape}
         fill={fill}
@@ -59,6 +61,7 @@ function App() {
         setTextSize={setTextSize}
         text={text}
         setText={setText}
+        canvasContainerRef={canvasContainerRef}
       />
     </div>
   );

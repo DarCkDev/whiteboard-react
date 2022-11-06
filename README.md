@@ -12,10 +12,12 @@
 - Poder dibujar sobre la imagen sin afectar a la imagen.
 - Eliminar la imagen de fondo sin afectar los trazos.
 - Insertar texto
+- Guardar como imagen (PNG)
 
 ## Funcionalidades con bugs
 
 - Rotar la figura
+- Guardar como imagen (PNG), guarda en diferente relación de aspecto.
 
 ## Uso
 

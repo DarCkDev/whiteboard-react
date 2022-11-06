@@ -1,5 +1,6 @@
 import React from "react";
 import { Action, Shape } from "../../models/Action";
+import { saveImage } from "../../services/saveAsImage";
 import ButtonTool from "../ButtonTool/ButtonTool";
 import styles from "./Menu.module.css";
 
@@ -22,6 +23,7 @@ const Menu = ({
   textSize,
   setTextSize,
   setText,
+  canvasContainerRef,
 }) => {
   const thicknessChange = (event) => {
     setThickness(+event.target.value);
@@ -84,12 +86,17 @@ const Menu = ({
     setTextSize(event.target.value);
   };
 
+  const onSaveCanvas = () => {
+    saveImage("My-image.png", canvasContainerRef.current);
+  };
+
   const buttons = [
     { shape: "fa-regular fa-circle", func: insertCircle },
     { shape: "fa-regular fa-square", func: insertSquare },
     { shape: "fa-regular fa-star", func: insertStar },
     { shape: "fa-solid fa-slash", func: insertLine },
     { shape: "fa-solid fa-t", func: insertText },
+    { shape: "fa-regular fa-floppy-disk", func: onSaveCanvas },
   ];
 
   const removeImage = () => {
