@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import Canvas from "./components/Canvas/Canvas";
+import CanvasBar from "./components/CanvasBar/CanvasBar";
 import Menu from "./components/Menu/Menu";
 import { Action } from "./models/Action";
 
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <div className="App">
+      <CanvasBar canvasContainerRef={canvasContainerRef} />
       <Canvas
         action={action}
         image={image}
