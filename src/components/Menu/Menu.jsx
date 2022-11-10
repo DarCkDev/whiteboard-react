@@ -10,8 +10,8 @@ const Menu = ({
   thickness,
   setThickness,
   setAction,
-  image,
-  setImage,
+  /*image,
+  setImage,*/
   canvasContext,
   angle,
   setAngle,
@@ -38,7 +38,7 @@ const Menu = ({
     setAction(parseInt(event.target.value));
     setShape(undefined);
   };
-  const imageChange = (event) => {
+  /*const imageChange = (event) => {
     if (event.target.files) {
       const fr = new FileReader();
       fr.onloadend = () => {
@@ -46,7 +46,7 @@ const Menu = ({
       };
       fr.readAsDataURL(event.target.files[0]);
     }
-  };
+  };*/
 
   const angleChange = (event) => {
     setAngle(+event.target.value);
@@ -64,9 +64,9 @@ const Menu = ({
     setShape(Shape.SQUARE);
   };
 
-  const insertStar = () => {
+  /*const insertStar = () => {
     setShape(Shape.STAR);
-  };
+  };*/
 
   const insertLine = () => {
     setShape(Shape.LINE);
@@ -93,15 +93,15 @@ const Menu = ({
   const buttons = [
     { shape: "fa-regular fa-circle", func: insertCircle },
     { shape: "fa-regular fa-square", func: insertSquare },
-    { shape: "fa-regular fa-star", func: insertStar },
+    //{ shape: "fa-regular fa-star", func: insertStar },
     { shape: "fa-solid fa-slash", func: insertLine },
     { shape: "fa-solid fa-t", func: insertText },
     { shape: "fa-regular fa-floppy-disk", func: onSaveCanvas },
   ];
 
-  const removeImage = () => {
+  /*const removeImage = () => {
     setImage(undefined);
-  };
+  };*/
 
   const clearCanvas = () => {
     canvasContext.clearRect(
@@ -157,7 +157,9 @@ const Menu = ({
         value={color}
         onChange={colorChange}
       />
-      <button onClick={clearCanvas}>Clear</button>
+      <button className={styles.canvasbtn__clear} onClick={clearCanvas}>
+        Clear
+      </button>
       <hr style={{ width: "100%" }} />
       <p>Relleno</p>
       <div className={styles.fill__container}>
@@ -171,7 +173,7 @@ const Menu = ({
         />
       </div>
       <hr style={{ width: "100%" }} />
-      <p>Imagen</p>
+      {/*<p>Imagen</p>
       <label htmlFor="image">
         <i className="fa-solid fa-image"></i>
         <input
@@ -186,7 +188,7 @@ const Menu = ({
         <button className={styles.btn__removeimage} onClick={removeImage}>
           <i className="fa-solid fa-xmark"></i>
         </button>
-      )}
+      )}*/}
       <hr style={{ width: "100%" }} />
       <div className={styles.shapes__container}>
         {buttons.map((btn, index) => (

@@ -16,7 +16,6 @@ const Canvas = ({
   color,
   canvasRef,
   canvasContext,
-  canvasContainerRef,
   shape,
   setShape,
   fill,
@@ -118,7 +117,7 @@ const Canvas = ({
 
   return (
     <div className={styles.canvas__container}>
-      <div className={styles.canvas__image} ref={canvasContainerRef}>
+      <div className={styles.canvas__image}>
         {image && <img className={styles.image} src={image} alt="" />}
         <canvas
           id="canvas"

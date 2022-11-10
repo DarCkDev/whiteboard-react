@@ -1,0 +1,35 @@
+.item__container {
+  width: 100%;
+  display: flex;
+  padding: 5px 0;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  border-bottom: 2px solid white;
+  transition: border-bottom 0.5s ease;
+}
+
+.item__title {
+  cursor: pointer;
+}
+
+.item__remove {
+  border: none;
+  color: red;
+  font-weight: bold;
+  background-color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: 1px solid red;
+  border-radius: 3px;
+  transition: background 0.5s ease;
+}
+
+.item__remove:hover {
+  background-color: red;
+  color: white;
+}
+
+.item__container:hover {
+  border-bottom: 2px solid blueviolet;
+}

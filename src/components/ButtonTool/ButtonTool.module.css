@@ -1,3 +1,15 @@
 .btn__shape {
   width: 50%;
+  height: 1.8rem;
+  border: 1px solid rebeccapurple;
+  background-color: white;
+  border-radius: 5px;
+  color: rebeccapurple;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn__shape:hover {
+  background-color: rebeccapurple;
+  color: white;
 }

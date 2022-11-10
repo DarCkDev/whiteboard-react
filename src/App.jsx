@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <CanvasBar canvasContainerRef={canvasContainerRef} />
+      <CanvasBar canvasRef={canvasRef} action={action} />
       <Canvas
         action={action}
         image={image}
