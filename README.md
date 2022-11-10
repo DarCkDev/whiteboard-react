@@ -34,7 +34,15 @@ El texto usará el color seleccionado, hacer clic en el botón T y escribir el t
 
 ## Instalación
 
-### `npm run install`
+### Requisitos:
+
+- Tener instalado Node JS y NPM
+
+Para instalar NodeJS, seguir el [enlace](www.nodejs.dev)
+
+### Comandos para instalación del proyecto:
+
+### `npm install`
 
 Para poder instalar las dependencias del proyecto
 
@@ -45,4 +53,4 @@ Abrir [http://localhost:3000](http://localhost:3000) para ver en el navegador.
 
 ### `npm run build`
 
-Construye la aplicación para producción.
+Construye la aplicación para producción, por defecto se encuentra en la carpeta _build_.
