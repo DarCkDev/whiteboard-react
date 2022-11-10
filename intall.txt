@@ -1,0 +1,16 @@
+Instalación
+Requisitos:
+Tener instalado Node JS y NPM
+Para instalar NodeJS en Windows y MacOS, seguir el enlace (https://nodejs.org/en/) y descargar el instalador.
+
+Para instalar NodeJS en Linux, seguir las instrucciones en el siguiente enlace (https://github.com/nodesource/distributions/blob/master/README.md)
+
+Comandos para instalación del proyecto:
+npm install
+Para poder instalar las dependencias del proyecto
+
+npm run start
+Inicia la aplicación en modo desarrollo. Abrir http://localhost:3000 para ver en el navegador.
+
+npm run build
+Construye la aplicación para producción, por defecto se encuentra en la carpeta build.

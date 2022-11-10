@@ -7,39 +7,30 @@ import { loadAllCanvas, saveCanvas } from "../../services/dbStorage";
 
 export default function CanvasBar({ canvasRef, action }) {
   const [canvasSet, setCanvasSet] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const onSaveCanvas = () => {
     saveCanvas(canvasRef, setCanvasSet, canvasSet);
   };
 
   useEffect(() => {
-    loadAllCanvas(setCanvasSet, setLoading);
+    loadAllCanvas(setCanvasSet);
   }, []);
 
   return (
     <div className={styles.canvasbar}>
       <h3 className={styles.canvasbar__title}>Canvas</h3>
-      <>
-        {loading ? (
-          <h3>Loading</h3>
-        ) : (
-          <>
-            <button className={styles.canvasbar__save} onClick={onSaveCanvas}>
-              Guardar
-            </button>
-            {canvasSet.map((c) => (
-              <Item
-                key={c.id}
-                item={c}
-                canvasRef={canvasRef}
-                setCanvasSet={setCanvasSet}
-                action={action}
-              />
-            ))}
-          </>
-        )}
-      </>
+      <button className={styles.canvasbar__save} onClick={onSaveCanvas}>
+        Guardar
+      </button>
+      {canvasSet.map((c) => (
+        <Item
+          key={c.id}
+          item={c}
+          canvasRef={canvasRef}
+          setCanvasSet={setCanvasSet}
+          action={action}
+        />
+      ))}
     </div>
   );
 }

@@ -20,6 +20,13 @@
 - Eliminar
 - Listar
 
+**Importante** -
+Navegadores probados:
+
+- Google Chrome
+- Microsoft Edge
+- ~~Mozilla Firefox~~ (Indexed DB presenta problemas en Firefox.)
+
 ## **Funcionalidades con bugs**
 
 - Rotar la figura
@@ -51,7 +58,9 @@ Hacer **clic sobre la x** elimina el lienzo de la base de datos.
 
 - Tener instalado Node JS y NPM
 
-Para instalar NodeJS, seguir el [enlace](www.nodejs.dev)
+Para instalar NodeJS en Windows y MacOS, seguir el [enlace](https://nodejs.org/en/) y descargar el instalador.
+
+Para instalar NodeJS en Linux, seguir las instrucciones en el siguiente [enlace](https://github.com/nodesource/distributions/blob/master/README.md)
 
 ### Comandos para instalación del proyecto:
 
