@@ -9,8 +9,8 @@
 - Borrador
 - Relleno opcional (al marcar el checkbox de relleno se habilita el selector de color para el relleno)
 - ~~Cargar imagen desde los archivos.~~
-- Poder dibujar sobre la imagen sin afectar a la imagen.
-- Eliminar la imagen de fondo sin afectar los trazos.
+- ~~Poder dibujar sobre la imagen sin afectar a la imagen.~~
+- ~~Eliminar la imagen de fondo sin afectar los trazos.~~
 - Insertar texto
 - Guardar como imagen (PNG)
 
