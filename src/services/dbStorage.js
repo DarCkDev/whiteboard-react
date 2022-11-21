@@ -1,7 +1,7 @@
 import uniqid from "uniqid";
 import { Action } from "../models/Action";
 
-export const loadAllCanvas = (setCanvasSet, setLoading) => {
+export const loadAllCanvas = (setCanvasSet) => {
   const idb = window.indexedDB.open("db_canvas", 1);
   idb.onsuccess = () => {
     const results = [];
@@ -15,7 +15,7 @@ export const loadAllCanvas = (setCanvasSet, setLoading) => {
         cursor.continue();
       } else {
         setCanvasSet(results);
-        setLoading(false);
+        //setLoading(false);
       }
     };
   };

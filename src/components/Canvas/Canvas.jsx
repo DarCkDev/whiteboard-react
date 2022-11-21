@@ -8,6 +8,7 @@ import {
   drawLine,
   drawText,
 } from "../../services/draw";
+import { useEffect } from "react";
 
 const Canvas = ({
   action,
@@ -23,6 +24,8 @@ const Canvas = ({
   angle,
   textSize,
   text,
+  user,
+  socket,
 }) => {
   const [drawing, setDrawing] = useState(false);
   const points = {
@@ -60,6 +63,15 @@ const Canvas = ({
       }
       canvasContext.lineTo(event.clientX, event.clientY);
       canvasContext.stroke();
+      if (socket.current) {
+        socket.current.emit("todraw", {
+          user,
+          x: event.clientX,
+          y: event.clientY,
+          color: color,
+          stroke: thickness,
+        });
+      }
     }
   };
 
@@ -115,6 +127,21 @@ const Canvas = ({
     setShape(undefined);
   };
 
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("todraw", (args) => {
+        canvasContext.beginPath();
+        canvasContext.lineTo(args.x, args.y);
+        canvasContext.strokeStyle = args.color;
+        canvasContext.lineWidth = args.thickness;
+        canvasContext.stroke();
+        canvasContext.closePath();
+      });
+    }
+    return () => {
+      socket.current.off("todraw");
+    };
+  }, [socket.current]);
   return (
     <div className={styles.canvas__container}>
       <div className={styles.canvas__image}>

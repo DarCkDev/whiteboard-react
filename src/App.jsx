@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import io from "socket.io-client";
 import "./App.css";
 import Canvas from "./components/Canvas/Canvas";
 import CanvasBar from "./components/CanvasBar/CanvasBar";
@@ -19,9 +20,40 @@ function App() {
   const [shape, setShape] = useState();
   const [textSize, setTextSize] = useState(16);
   const [text, setText] = useState();
+  const socket = useRef(null);
+  const params = new URLSearchParams(window.location.search);
+
+  // const newSocket = io(`http://${window.location.hostname}:3003`, {
+  //   transports: ["websocket"],
+  // });
+  const room = params.get("room");
+  const username = params.get("username");
+
+  /*if (socket) {
+    console.log("OK");
+    socket.on("access", (data) => {
+      console.log(data);
+    });
+  } else {
+    setSocket(
+      io(`http://${window.location.hostname}:3003`, {
+        transports: ["websocket"],
+      })
+    );
+  }*/
 
   useEffect(() => {
     setContext(canvasRef.current.getContext("2d"));
+    socket.current = io(`http://${window.location.hostname}:3003`, {
+      transports: ["websocket"],
+    });
+    if (socket.current) {
+      console.log("emiting");
+      const user = { room, username };
+      socket.current.emit("access", user);
+    } else {
+      console.log("null");
+    }
   }, []);
 
   return (
@@ -42,6 +74,8 @@ function App() {
         angle={angle}
         textSize={textSize}
         text={text}
+        user={username}
+        socket={socket}
       />
       <Menu
         color={color}
