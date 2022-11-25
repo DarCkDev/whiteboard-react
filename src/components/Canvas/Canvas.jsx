@@ -144,7 +144,7 @@ const Canvas = ({
     return () => {
       socket.current.off("todraw");
     };
-  }, [socket.current]);
+  }, []);
   return (
     <div className={styles.canvas__container}>
       <div className={styles.canvas__image}>

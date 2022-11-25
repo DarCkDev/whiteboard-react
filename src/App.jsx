@@ -20,6 +20,7 @@ function App() {
   const [shape, setShape] = useState();
   const [textSize, setTextSize] = useState(16);
   const [text, setText] = useState();
+  const [users, setUsers] = useState([]);
   const socket = useRef(null);
   const params = new URLSearchParams(window.location.search);
 
@@ -47,18 +48,29 @@ function App() {
     socket.current = io(`http://${window.location.hostname}:3003`, {
       transports: ["websocket"],
     });
-    if (socket.current) {
-      console.log("emiting");
+    /*if (socket.current) {
       const user = { room, username };
       socket.current.emit("access", user);
-    } else {
-      console.log("null");
-    }
+      socket.current.on("users", (args) => {
+        console.log(args);
+      });
+    }*/
+    const user = { room, username };
+    socket.current.emit("access", user);
+    socket.current.on("userconnected", (args) => {
+      setUsers(args.users);
+    });
+    socket.current.on("userdisconect", (args) => {
+      setUsers(args.users);
+    });
+    return () => {
+      socket.current.off("userconnected"), socket.current.off("userdisconect");
+    };
   }, []);
 
   return (
     <div className="App">
-      <CanvasBar canvasRef={canvasRef} action={action} />
+      <CanvasBar canvasRef={canvasRef} action={action} users={users} />
       <Canvas
         action={action}
         image={image}
