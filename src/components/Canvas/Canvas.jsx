@@ -70,6 +70,7 @@ const Canvas = ({
           y: event.clientY,
           color: color,
           stroke: thickness,
+          action: action,
         });
       }
     }
@@ -130,10 +131,12 @@ const Canvas = ({
   useEffect(() => {
     if (socket.current) {
       socket.current.on("todraw", (args) => {
+        canvasContext.globalCompositeOperation =
+          args.action === 1 ? "source-over" : "destination-out";
         canvasContext.beginPath();
         canvasContext.lineTo(args.x, args.y);
         canvasContext.strokeStyle = args.color;
-        canvasContext.lineWidth = args.thickness;
+        canvasContext.lineWidth = args.stroke;
         canvasContext.stroke();
         canvasContext.closePath();
       });
