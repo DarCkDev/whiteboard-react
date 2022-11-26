@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     setContext(canvasRef.current.getContext("2d"));
-    socket.current = io(`http://${window.location.hostname}:3003`, {
+    socket.current = io(`http://localhost:3003`, {
       transports: ["websocket"],
     });
     if (socket.current) {
