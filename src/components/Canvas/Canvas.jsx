@@ -64,14 +64,8 @@ const Canvas = ({
       canvasContext.lineTo(event.clientX, event.clientY);
       canvasContext.stroke();
       if (socket.current) {
-        socket.current.emit("todraw", {
-          user,
-          x: event.clientX,
-          y: event.clientY,
-          color: color,
-          stroke: thickness,
-          action: action,
-        });
+        const url = canvasRef.current.toDataURL();
+        socket.current.emit("todraw", { user, data: url });
       }
     }
   };
@@ -124,6 +118,10 @@ const Canvas = ({
     } else {
       canvasContext.closePath();
     }
+    if (socket.current) {
+      const url = canvasRef.current.toDataURL();
+      socket.current.emit("todraw", { user, data: url });
+    }
     setDrawing(false);
     setShape(undefined);
   };
@@ -131,14 +129,13 @@ const Canvas = ({
   useEffect(() => {
     if (socket.current) {
       socket.current.on("todraw", (args) => {
-        canvasContext.globalCompositeOperation =
-          args.action === 1 ? "source-over" : "destination-out";
-        canvasContext.beginPath();
-        canvasContext.lineTo(args.x, args.y);
-        canvasContext.strokeStyle = args.color;
-        canvasContext.lineWidth = args.stroke;
-        canvasContext.stroke();
-        canvasContext.closePath();
+        canvasContext.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        const image = new Image();
+        image.onload = function () {
+          canvasContext.drawImage(image, 0, 0);
+        };
+        image.src = args.data;
+        console.log("CANVAS", args.data);
       });
     }
     return () => {

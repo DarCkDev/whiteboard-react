@@ -23,33 +23,45 @@ function App() {
   const socket = useRef(null);
   const params = new URLSearchParams(window.location.search);
 
-  // const newSocket = io(`http://${window.location.hostname}:3003`, {
-  //   transports: ["websocket"],
-  // });
   const room = params.get("room");
   const username = params.get("username");
 
-  /*if (socket) {
-    console.log("OK");
-    socket.on("access", (data) => {
-      console.log(data);
-    });
-  } else {
-    setSocket(
-      io(`http://${window.location.hostname}:3003`, {
-        transports: ["websocket"],
-      })
-    );
-  }*/
+  const getData = async () => {
+    const res = await fetch(`http://localhost:3003/canvas/${room}`);
+    if (res.status === 200) {
+      const canvasDB = await res.json();
+      console.log("RESPONSE", canvasDB);
+      const image = new Image();
+      image.onload = function () {
+        canvasRef.current.getContext("2d").drawImage(image, 0, 0);
+      };
+      image.src = canvasDB.content;
+    }
+  };
+
+  setTimeout(() => {
+    const content = canvasRef.current.toDataURL();
+    fetch("http://localhost:3003/save", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ room, content }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+  }, 30000);
 
   useEffect(() => {
     setContext(canvasRef.current.getContext("2d"));
+    const user = { room, username };
+    getData();
     socket.current = io(`http://localhost:3003`, {
       transports: ["websocket"],
     });
     if (socket.current) {
       console.log("emiting");
-      const user = { room, username };
       socket.current.emit("access", user);
     } else {
       console.log("null");
